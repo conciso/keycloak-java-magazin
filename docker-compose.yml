@@ -14,4 +14,4 @@ services:
       - 8443:8443
       - 8787:8787
     volumes:
-    - ./target/keycloak-provider.jar:/opt/keycloak/providers/keycloak-provider.jar
+    - ./target/keycloak-provider.jar:/opt/keycloak/providers/keycloak-provider.jar:ro

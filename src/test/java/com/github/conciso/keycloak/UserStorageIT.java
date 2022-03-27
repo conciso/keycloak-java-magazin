@@ -1,10 +1,10 @@
 package com.github.conciso.keycloak;
 
 import dasniko.testcontainers.keycloak.KeycloakContainer;
-import org.assertj.core.internal.Conditions;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.keycloak.representations.info.ProviderRepresentation;
+import org.testcontainers.containers.BindMode;
 import org.testcontainers.junit.jupiter.Container;
 import org.testcontainers.junit.jupiter.Testcontainers;
 
@@ -22,13 +22,24 @@ public class UserStorageIT {
     @Test
     @DisplayName("User Storage Provider can be registerd")
     void canRegisterSPI() {
-        Map<String, ProviderRepresentation> providers = CONTAINER.getKeycloakAdminClient()
+        Map<String, ProviderRepresentation> providers = getStorageProviderInfo();
+        assertThat(providers).containsKey("custom-provider");
+    }
+
+    @Test
+    @DisplayName("Provides information on server info page")
+    void providesInfo() {
+        Map<String, ProviderRepresentation> providers = getStorageProviderInfo();
+        assertThat(providers.get("custom-provider").getOperationalInfo()).containsKey("version");
+    }
+
+    private static Map<String, ProviderRepresentation> getStorageProviderInfo() {
+        return CONTAINER.getKeycloakAdminClient()
             .serverInfo()
             .getInfo()
             .getProviders()
             .get("storage")
             .getProviders();
-        assertThat(providers).containsKey("custom-provider");
     }
 
 }

@@ -58,7 +58,7 @@
     </properties>
 
     <build>
-        <finalName>${project.artifactId}</finalName>
+        <finalName>keycloak-provider</finalName>
 
         <pluginManagement>
             <plugins>
@@ -82,7 +82,6 @@
                     <configuration>
                         <systemPropertyVariables>
                             <org.jboss.logging.provider>log4j2</org.jboss.logging.provider>
-                            <keycloak.version>${keycloak.version}</keycloak.version>
                         </systemPropertyVariables>
                     </configuration>
                 </plugin>
@@ -224,9 +223,14 @@
         </dependency>
         <dependency>
             <groupId>org.testcontainers</groupId>
-            <artifactId>selenium</artifactId>
+            <artifactId>mockserver</artifactId>
             <version>${version.testcontainers}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mock-server</groupId>
+            <artifactId>mockserver-client-java</artifactId>
+            <version>5.13.0</version>
         </dependency>
 
         <dependency>

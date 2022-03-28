@@ -6,6 +6,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.keycloak.admin.client.Keycloak;
+import org.keycloak.common.util.MultivaluedHashMap;
 import org.keycloak.jose.jws.JWSInput;
 import org.keycloak.jose.jws.JWSInputException;
 import org.keycloak.representations.AccessToken;
@@ -68,6 +69,9 @@ public class UserStorageIT {
         userStorageComponent.setName("REST");
         userStorageComponent.setProviderType(UserStorageProvider.class.getName());
         userStorageComponent.setProviderId("custom-provider");
+        MultivaluedHashMap<String, String> config = new MultivaluedHashMap<>();
+        config.putSingle("baseUrl", "http://mockserver");
+        userStorageComponent.setConfig(config);
         Response response = KEYCLOAK_CONTAINER.getKeycloakAdminClient()
             .realm("master")
             .components()

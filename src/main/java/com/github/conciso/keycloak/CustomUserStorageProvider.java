@@ -53,7 +53,8 @@ public class CustomUserStorageProvider
     @Override
     public UserModel getUserByUsername(RealmModel realm, String username) {
         try {
-            SimpleHttp.Response response = SimpleHttp.doGet("http://mockserver/users", client)
+            String baseUrl = componentModel.getConfig().getFirst("baseUrl");
+            SimpleHttp.Response response = SimpleHttp.doGet(baseUrl + "/users", client)
                 .param("username", username)
                 .acceptJson()
                 .asResponse();

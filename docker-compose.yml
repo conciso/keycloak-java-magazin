@@ -15,3 +15,4 @@ services:
       - 8787:8787
     volumes:
     - ./target/keycloak-provider.jar:/opt/keycloak/providers/keycloak-provider.jar:ro
+    - ./target/dependency/kotlin-stdlib.jar:/opt/keycloak/providers/kotlin-stdlib.jar:ro
